@@ -2,7 +2,7 @@ package org.afrivera.pooclasesabstractas.form.validador;
 
 public class LargoValidador extends Validador{
 
-    protected String mensaje = "el campo debe tener minmimo %d caracteres y maximo %d caracteres";
+    protected String mensaje = "el campo %s debe tener minimo %d caracteres y maximo %d caracteres";
     private int min;
     private int max = Integer.MAX_VALUE;
 
@@ -30,6 +30,10 @@ public class LargoValidador extends Validador{
         this.max = max;
     }
 
+    public String getMensajeFormateado(String campo){
+        return String.format(this.mensaje, campo, this.min, this.max);
+    }
+
     @Override
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
@@ -42,7 +46,7 @@ public class LargoValidador extends Validador{
 
     @Override
     public boolean esValido(String valor) {
-        this.mensaje = String.format(this.mensaje, this.min, this.max);
+        // this.mensaje = String.format(this.mensaje, this.min, this.max);
         if( valor == null){
             return true;
         }

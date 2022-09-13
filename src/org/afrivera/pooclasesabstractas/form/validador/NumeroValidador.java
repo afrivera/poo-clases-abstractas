@@ -2,7 +2,7 @@ package org.afrivera.pooclasesabstractas.form.validador;
 
 public class NumeroValidador extends Validador{
 
-    protected String mensaje = "el campo debe ser un número";
+    protected String mensaje = "el campo %s debe ser un número";
 
     @Override
     public void setMensaje(String mensaje) {

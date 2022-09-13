@@ -2,6 +2,7 @@ package org.afrivera.pooclasesabstractas.form;
 
 import org.afrivera.pooclasesabstractas.form.elementos.*;
 import org.afrivera.pooclasesabstractas.form.elementos.select.Opcion;
+import org.afrivera.pooclasesabstractas.form.validador.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,17 +18,28 @@ public class EjemploForm {
 //            }
 //        };
         InputForm userName = new InputForm("username");
+        userName.addValidador(new RequeridoValidador());
+
         InputForm password = new InputForm("clave", "password");
+        password.addValidador(new RequeridoValidador());
+        password.addValidador(new LargoValidador(6, 12));
+
         InputForm email = new InputForm("email", "email");
+        email.addValidador(new RequeridoValidador())
+                .addValidador(new EmailValidador());
+
         InputForm edad = new InputForm("edad", "number");
+        edad.addValidador(new NumeroValidador());
 
         TextAreaForm experiencia = new TextAreaForm("exp", 5, 9);
 
         SelectForm lenguaje = new SelectForm("lenguaje");
+        lenguaje.addValidador(new NoNulo());
+
         Opcion java = new Opcion("1", "Java");
         lenguaje.addOpcion(java)
-            .addOpcion(new Opcion("2", "Python"))
-            .addOpcion(new Opcion("3", "JavaScript").setSelected())
+            .addOpcion(new Opcion("2", "Python").setSelected())
+            .addOpcion(new Opcion("3", "JavaScript"))
             .addOpcion(new Opcion("4", "TipeScript"))
             .addOpcion(new Opcion("5", "PHP"));
 
@@ -41,8 +53,8 @@ public class EjemploForm {
 
         saludar.setValor("Hola que tal este campo está deshabilitado");
 
-        userName.setValor("john.doe");
-        password.setValor("abc123");
+        userName.setValor("");
+        password.setValor("abc12");
         email.setValor("jhon.doe@correo.com");
         edad.setValor("28");
         experiencia.setValor("... mas de 7 años de experiencia ....");
@@ -66,6 +78,12 @@ public class EjemploForm {
         elementos.forEach( e -> {
             System.out.println(e.dibujarHtml());
             System.out.println("<br>");
+        });
+
+        elementos.forEach(e ->{
+            if(!e.esValido()){
+                e.getErrores().forEach(System.out::println);
+            }
         });
     }
 }

@@ -2,7 +2,7 @@ package org.afrivera.pooclasesabstractas.form.validador;
 
 public class EmailValidador extends Validador{
 
-    protected String mensaje = "Formato de email incorrecto";
+    protected String mensaje = "el campo %s tiene un formato de correo invalido";
     private final static String EMAIL_REGEX = "^(.+)@(.+)$";
 
     @Override
