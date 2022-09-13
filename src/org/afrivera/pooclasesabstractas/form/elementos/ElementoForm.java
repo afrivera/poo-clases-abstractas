@@ -17,6 +17,6 @@ abstract public class ElementoForm {
         this.valor = valor;
     }
 
-    // así se define la clase abstracta sin llaves
+    // así se define los metodos abstractos sin llaves
     abstract public String dibujarHtml();
 }
